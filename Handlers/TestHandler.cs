@@ -3,7 +3,7 @@ using System.Diagnostics;
 using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface;
 
-namespace TracingTest
+namespace TracingTest.Handlers
 {
     
     [Route("/activities","GET")]

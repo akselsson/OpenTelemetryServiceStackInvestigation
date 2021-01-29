@@ -1,7 +1,7 @@
 using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface;
 
-namespace TracingTest
+namespace TracingTest.Handlers
 {
     
     [Route("/clear","POST")]
