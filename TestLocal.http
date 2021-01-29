@@ -1,0 +1,19 @@
+
+### Clear stored activities
+POST http://localhost:21101/clear
+
+### First run a servicestack handler
+GET http://localhost:21101/activities?format=csv
+
+
+### Then list all activities, response is empty
+
+GET http://localhost:21101/activities?format=csv
+
+### Then call a page that is not a servicestack handler
+
+GET http://localhost:21101/metadata
+
+### There are now stored activities
+
+GET http://localhost:21101/activities?format=csv
