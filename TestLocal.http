@@ -1,19 +1,21 @@
 
 ### Clear stored activities
 POST http://localhost:21101/clear
+traceparent: 00-00c8edc74d586f8d9bb016b50aa540bc-1111111111111111-01
 
 ### First run a servicestack handler
 GET http://localhost:21101/activities?format=csv
-
+traceparent: 00-00c8edc74d586f8d9bb016b50aa540bc-1111111111111111-01
 
 ### Then list all activities, response is empty
 
 GET http://localhost:21101/activities?format=csv
-
+traceparent: 00-00c8edc74d586f8d9bb016b50aa540bc-1111111111111111-01
 ### Then call a page that is not a servicestack handler
 
 GET http://localhost:21101/metadata
-
+traceparent: 00-00c8edc74d586f8d9bb016b50aa540bc-1111111111111111-01
 ### There are now stored activities
 
 GET http://localhost:21101/activities?format=csv
+traceparent: 00-00c8edc74d586f8d9bb016b50aa540bc-1111111111111111-01
