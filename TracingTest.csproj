@@ -192,6 +192,9 @@
     <Compile Include="Handlers\ClearHandler.cs">
       <DependentUpon>Handlers</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\HttpRequesthandler.cs">
+      <DependentUpon>Handlers</DependentUpon>
+    </Compile>
     <Compile Include="Handlers\TestHandler.cs">
       <DependentUpon>Handlers</DependentUpon>
     </Compile>

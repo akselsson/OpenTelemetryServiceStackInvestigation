@@ -4,11 +4,11 @@ POST http://localhost:21101/clear
 traceparent: 00-00c8edc74d586f8d9bb016b50aa540bc-1111111111111111-01
 
 ### First run a servicestack handler
-GET http://localhost:21101/activities?format=csv
+GET http://localhost:21101/activities?format=json
 traceparent: 00-00c8edc74d586f8d9bb016b50aa540bc-1111111111111111-01
 
 ### Then list all activities, response is empty
-GET http://localhost:21101/activities?format=csv
+GET http://localhost:21101/activities?format=json
 traceparent: 00-00c8edc74d586f8d9bb016b50aa540bc-1111111111111111-01
 
 ### Then call a page that is not a servicestack handler
@@ -16,5 +16,23 @@ GET http://localhost:21101/metadata
 traceparent: 00-00c8edc74d586f8d9bb016b50aa540bc-1111111111111111-01
 
 ### There are now stored activities from the metadata request
-GET http://localhost:21101/activities?format=csv
+GET http://localhost:21101/activities?format=json
+traceparent: 00-00c8edc74d586f8d9bb016b50aa540bc-1111111111111111-01
+
+### So, what happens if we make an http call inside a stackdriver handler?
+### Lets first clear all stored activities
+POST http://localhost:21101/clear
+traceparent: 00-00c8edc74d586f8d9bb016b50aa540bc-1111111111111111-01
+
+### We will then call a handler that uses HttpClient to fetch http://example.org
+GET http://localhost:21101/http?format=json
+traceparent: 00-00c8edc74d586f8d9bb016b50aa540bc-1111111111111111-01
+
+### We do get an activity for the remote request but not for the parent activity
+### Also note that the OpenTelemetry.HttpWebRequest.HttpRequestOut activity actually
+### has a Microsoft.AspNet.HttpReqIn activity as parent, but it's not sent to the exporter
+### So it seems like a HttpReqIn activity is started but never finished
+### This means that the remote request will seem like it does not have a parent
+### if it's sent to e.g. Stackdriver
+GET http://localhost:21101/activities?format=json
 traceparent: 00-00c8edc74d586f8d9bb016b50aa540bc-1111111111111111-01
