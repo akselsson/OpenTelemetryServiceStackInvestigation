@@ -12,7 +12,7 @@ namespace TracingTest
 
     public class ClearRequestHandler : Service
     {
-        public void Get(ClearRequest request)
+        public void Post(ClearRequest request)
         {
             ServiceStackAppHost.ExportedActivities.Clear();
         }
